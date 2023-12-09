@@ -3,7 +3,6 @@ from .models import Cart, CartProduct
 from products.models import Product
 from accounts.models import CustomUser
 
-# Create your tests here.
 class CartTests(TestCase):
     def setUp(self):
         self.user = CustomUser.objects.create(
@@ -14,12 +13,12 @@ class CartTests(TestCase):
             customer=self.user
         )
 
-    def test_cart_creation(self):
-        self.assertEqual(str(self.cart), f'{self.user.name}\'s Cart')
+    def test_cart_str_method(self):
+        expected_str = f"{self.user.name}'s Cart"
+        self.assertEqual(str(self.cart), expected_str)
 
-    def test_cartProduct_creation(self):
+    def test_cartProduct_str_method(self):
         product = Product.objects.create(name='Test Product', price=10.0, quantity_in_stock=5)
-        cartProduct = CartProduct.objects.create(product=product, cart=self.cart)
-        self.assertEqual(str(cartProduct), f'{product.name} in {self.cart}')
-
-
+        cart_product = CartProduct.objects.create(product=product, cart=self.cart)
+        expected_str = f"{product.name} in {self.cart}"
+        self.assertEqual(str(cart_product), expected_str)
