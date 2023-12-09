@@ -1,9 +1,11 @@
+#from django.contrib.auth.decorators import login_required #require login
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Cart, CartProduct
 from products.models import Product
 #from accounts.models import CustomUser
 
 # Create your views here.
+#@login_required
 def add_to_cart(request, product_id):
     product = get_object_or_404(Product, id=product_id)
     user = request.user
@@ -21,6 +23,7 @@ def add_to_cart(request, product_id):
 
     return redirect('product_detail', pk=product_id)
 
+#@login_required
 def view_cart(request):
     user = request.user
 
@@ -31,6 +34,7 @@ def view_cart(request):
 
     return render(request, 'view_cart.html', {'cart': cart, 'cart_products': cart_products})
 
+#@login_required
 def remove_from_cart(request, product_id):
     product = get_object_or_404(Product, id=product_id)
     user = request.user
