@@ -1,0 +1,36 @@
+{% extends 'products/base.html' %}
+
+{% block title %}Shopping Cart - E-Commerce App{% endblock %}
+
+{% block header %}Shopping Cart{% endblock %}
+
+{% block content %}
+    <h2>Your Shopping Cart</h2>
+    
+    {% if cart_products %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for cart_product in cart_products %}
+                    <tr>
+                        <td>{{ cart_product.product.name }}</td>
+                        <td>{{ cart_product.quantity }}</td>
+                        <td>
+                            <a href="{% url 'remove_from_cart' product_id=cart_product.product.id %}">Remove</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>Your cart is empty.</p>
+    {% endif %}
+    
+    <a href="{% url 'product_list' %}">Continue Shopping</a>
+{% endblock %}

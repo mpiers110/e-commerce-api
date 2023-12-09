@@ -29,7 +29,7 @@ def view_cart(request):
 
     cart_products = CartProduct.objects.filter(cart=cart)
 
-    return render(request, 'cart/view_cart.html', {'cart': cart, 'cart_products': cart_products})
+    return render(request, 'view_cart.html', {'cart': cart, 'cart_products': cart_products})
 
 def remove_from_cart(request, product_id):
     product = get_object_or_404(Product, id=product_id)
