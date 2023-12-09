@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Cart, CartProduct
 from products.models import Product
-from accounts.models import CustomUser
+#from accounts.models import CustomUser
 
 # Create your views here.
 def add_to_cart(request, product_id):
@@ -19,7 +19,7 @@ def add_to_cart(request, product_id):
         cart_product.quantity += 1
         cart_product.save()
 
-    return redirect('product_list')
+    return redirect('product_detail', pk=product_id)
 
 def view_cart(request):
     user = request.user
