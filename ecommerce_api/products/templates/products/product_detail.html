@@ -5,6 +5,11 @@
 {% block header %}Product Detail{% endblock %}
 
 {% block content %}
+<style>
+    .span{
+        margin-right: 5px;
+    }
+</style>
     <div class="container mt-4">
         <h2>{{ product.name }}</h2>
         <div class="row">
@@ -21,10 +26,17 @@
                 <p>Quantity in Stock: {{ product.quantity_in_stock }}</p>
                 <div class="btn-group mt-3" role="group">
                     <a href="{% url 'product_update' pk=product.pk %}" class="btn btn-primary">Edit</a>
-                    <span style="margin-right: 5px;"></span>
+                    <span class="span"></span>
                     <a href="{% url 'product_delete' pk=product.pk %}" class="btn btn-danger">Delete</a>
+                    <span class="span"></span>
+                    <form method="post" action="{% url 'add_to_cart' product.pk %}">
+                        {% csrf_token %}
+                        <button type="submit">Add to Cart</button>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
 {% endblock %}
+
+
